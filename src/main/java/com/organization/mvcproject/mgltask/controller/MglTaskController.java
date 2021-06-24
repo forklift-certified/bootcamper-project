@@ -1,4 +1,4 @@
-package com.organization.mvcproject.MGL_Task1.controller;
+package com.organization.mvcproject.mgltask.controller;
 
 import java.util.List;
 
@@ -13,16 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.organization.mvcproject.MGL_Task1.model.Game;
-import com.organization.mvcproject.MGL_Task1.model.Review;
-import com.organization.mvcproject.MGL_Task1.service.Game_Service;
+import com.organization.mvcproject.mgltask.model.GameImpl;
+import com.organization.mvcproject.mgltask.model.ReviewImpl;
+import com.organization.mvcproject.mgltask.service.GameServiceImpl;
+import com.organzation.mvcproject.mgltask.api.model.Game;
+//import com.organzation.mvcproject.mgltask.api.model.Review;
+
 
 
 @Controller
-public class MGL_Task1_Controller {
+public class MglTaskController{
 
 	@Autowired
-	private Game_Service javaGameService;
+	private GameServiceImpl javaGameService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -31,11 +34,11 @@ public class MGL_Task1_Controller {
 
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public ModelAndView review() {
-		return new ModelAndView("review", "command", new Review());
+		return new ModelAndView("review", "command", new ReviewImpl());
 	}
 
 	@RequestMapping(value = "/addReview", method = RequestMethod.POST)
-	public ModelAndView addReview(Review review, ModelMap model) {
+	public ModelAndView addReview(ReviewImpl review, ModelMap model) {
 		if(review.getAuthor().equals("")) {
 			review.setAuthor("anonymous");
 		}
@@ -44,7 +47,7 @@ public class MGL_Task1_Controller {
 
 	@RequestMapping(value = "/games", method = RequestMethod.GET)
 	public ModelAndView game() {
-		return new ModelAndView("games", "command", new Game());
+		return new ModelAndView("games", "command", new GameImpl());
 	}
 
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
@@ -53,8 +56,21 @@ public class MGL_Task1_Controller {
 	}
 
 	@RequestMapping(value = "/createGame", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> createGame(@RequestBody Game game) {
+	public ResponseEntity<Void> createGame(@RequestBody GameImpl game) {
 		javaGameService.saveGame(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> delete(@RequestBody GameImpl game) {
+		javaGameService.delete(game);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		}
+		
+	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> update(@RequestBody GameImpl game) {
+		javaGameService.saveGame(game);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		}
+		
 }

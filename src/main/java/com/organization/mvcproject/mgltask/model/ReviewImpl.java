@@ -1,6 +1,6 @@
-package com.organization.mvcproject.MGL_Task1.model;
+package com.organization.mvcproject.mgltask.model;
 
-public class Review {
+public class ReviewImpl {
 	private String reviewBody;
 	private String author;
 	private Integer rating;

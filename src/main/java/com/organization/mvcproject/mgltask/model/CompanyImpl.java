@@ -1,16 +1,19 @@
-package com.organization.mvcproject.MGL_Task1.model;
+package com.organization.mvcproject.mgltask.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.organzation.mvcproject.mgltask.api.model.Company;
+import com.organzation.mvcproject.mgltask.api.model.Game;
+
 @Component
-public class Company {
+public class CompanyImpl implements Company{
 
 	private Long id;
 	private String name;
-	private List<Game> gamesMade = new ArrayList<Game>();
+	private List<Game> gamesMade = new ArrayList<>();
 
 	public Long getId() {
 		return id;
