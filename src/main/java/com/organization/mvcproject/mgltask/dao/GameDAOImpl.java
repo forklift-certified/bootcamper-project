@@ -55,6 +55,7 @@ public class GameDAOImpl implements GameDAO{
 	@Override
 	public Game saveGame(Game input) 
 	{
+		
 		if (input.getId() != null)
 		{
 			Game foundGame = getGameById(input.getId());
@@ -94,13 +95,16 @@ public class GameDAOImpl implements GameDAO{
 	
 	@Override
 	public boolean delete(Game input) {
+		
 		for(Game g: games)
 		{
 			if (g.getId().equals(input.getId()))
 			{
-				return games.remove(input);
+
+				return games.remove(g);
 			}
 		}
+		
 		
 		return false;
 	}

@@ -29,7 +29,8 @@ public class GameServiceImpl implements GameService {
 	public boolean delete(Game input) {
 		return gameDao.delete(input);
 	}
-
+	
+	
 
 
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
-		[ 'MGL_Task1_Service', function(MGL_Task1_Service) {
+		[ 'MGL_Task1_Service', '$document', function(MGL_Task1_Service, $document) {
 			var self = this;
 			self.game = {
 				game_id : '',
@@ -16,11 +16,31 @@ angular.module('MGL_Task1_app').controller('MGL_Task1_Controller',
 				});
 			}
 
-			self.addGame = function(){
-				return MGL_Task1_Service.createGame(self.game).then( function() {
+			self.addGame = function(game){
+				console.log("function called");
+				console.log(game);
+				return MGL_Task1_Service.createGame(game).then( function() {
 				self.fetchAllGames();
 				});
 			}
+			
+			self.deleteGame = function(game){
+				return MGL_Task1_Service.deleteGame(game).then( function() {
+				self.fetchAllGames();
+				});
+			}
+			
+			
+			self.showUpdateGameRow = function(game)
+	    	{
+		    	
+		    	document.getElementById('name_header').style.display="table-cell" ;
+		    	document.getElementById('genre_header').style.display="table-cell" ;
+		    	document.getElementById('finalize').style.display="table-cell";
+		    	document.getElementById(game.name+'_input').style.display="table-cell";
+		    	document.getElementById(game.name+'_genre_input').style.display="table-cell";
+	    		document.getElementById(game.name+'_update').style.display="table-cell";
+	    	}
 			
 			self.fetchAllGames();
 		} ]);

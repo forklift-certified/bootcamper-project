@@ -66,11 +66,9 @@ public class MglTaskController{
 		javaGameService.delete(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 		}
-		
-	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> update(@RequestBody GameImpl game) {
-		javaGameService.saveGame(game);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
-		}
-		
+	
+	/*@DeleteMapping(value="/{id}")
+	public ResponseEntity<?> delete(@PathVariable String id) {
+		return new ResponseEntity<>(javaGameService.deleteGame(Long.valueOf(id), HttpStatus.OK));
+		}*/
 }

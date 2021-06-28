@@ -69,35 +69,71 @@
                                 <input type="submit" value="Add" class="btn btn-primary btn-sm">
                             </div>
                         </div>
+                        
+                        
                     </form>
                 </div>
             </div>
+            
+                   
+                    
+            
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading text-light"><span class="lead">List of all current games</span></div>
                 <div class="tablecontainer">
                     <table class="table table-dark table-striped text-light">
                         <thead>
-                            <tr>
+                            <tr >
                                 <th>Game Name</th>
                                 <th>Game Genre</th>
-                                <th width="20%"></th>
+                                <th id = "edit">Edit</th>
+                                <th id = "name_header" style="display:none;">New Name</th>
+                                <th id = "genre_header" style="display:none;">New Genre</th>
+                                <th id = "finalize" style="display:none;"></th>
+                                <th id ="delete_header">Delete</th>                               
                             </tr>
+                            
                         </thead>
                         <tbody>
-                            <tr ng-repeat="currentGame in MGL_T1_ctrl.games">
+                            <tr ng-repeat="currentGame in MGL_T1_ctrl.games" ng-attr-id = "currentGame.id">
                                 <td><span ng-bind="currentGame.name"></span></td>
                                 <td><span ng-bind="currentGame.genre"></span></td>
-                                <td>
+                                <td><button ng-click = "MGL_T1_ctrl.showUpdateGameRow(currentGame)" class="btn btn-primary btn-sm">Edit</button></td>
+	                            <td><input type="text" ng-model="currentGame.name" ng-attr-id="{{currentGame.name + '_input'}}" style="display:none;"  /></td>
+	                            <td><input type="text" ng-model="currentGame.genre" ng-attr-id="{{currentGame.name + '_genre_input'}}" style="display:none;" /></td>
+	                            <td><button ng-click = MGL_T1_ctrl.addGame(currentGame) ng-attr-id="{{currentGame.name + '_update'}}" class="btn btn-primary btn-sm" style="display:none;" />Submit</td>
+                                <td><button ng-click = MGL_T1_ctrl.deleteGame(currentGame) class="btn btn-primary btn-sm">Delete</button></td>
+                                
                                 </td>
                             </tr>
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
+	<script type="text/javascript">
+	    function hide()
+	    {
+	    	
+	    	document.getElementById('dummy_n').style.display="none";
+	    	document.getElementById('dummy_g').style.display="none";
+	    	document.getElementById('dummy_b').style.display="none";
+	    	document.getElementById('dummy_s').style.display="none";
+	    	document.getElementById('dummy_d').style.display="none";
+	    	document.getElementById('dummy_genre').style.display="none";
+	    	document.getElementById('dummy_name').style.display="none";
+	    	
+	    	
+	    }
+	    
+	
+    
+    </script>
+
     </body>
-    <script type="text/javascript"></script>
+    
 
     </html>
